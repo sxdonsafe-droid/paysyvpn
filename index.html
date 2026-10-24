@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaysyVPN</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+        
+        body { 
+            background: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #050505 60%, #000000 100%);
+            color: #fff; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 24px; 
+            position: relative; 
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: #00d4ff;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .tg-button { 
+            position: absolute; 
+            top: 24px; 
+            right: 24px; 
+            width: 46px; 
+            height: 46px; 
+            border-radius: 50%; 
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-decoration: none; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .tg-button:hover { 
+            transform: translateY(-2px) scale(1.05); 
+            background: rgba(40, 40, 40, 0.9);
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+        .tg-button img { width: 24px; height: 24px; }
+        
+        .grid-container { 
+            margin-top: 90px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 16px; 
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .bar { 
+            background: linear-gradient(145deg, #141414, #0a0a0a);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px; 
+            padding: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            min-height: 80px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .bar:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* ===== ТЕКСТЫ ===== */
+        
+        /* Все крупные надписи (включая верхние) теперь одного размера */
+        .bar-title-text, .bar-traffic-text, .bar-text { 
+            font-size: 22px; 
+            font-weight: 800; 
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-align: center;
+        }
+        
+        /* Мелкие надписи в углах */
+        .label-corner { 
+            position: absolute; 
+            top: 14px; 
+            left: 20px; 
+            color: #aaa; 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-active { 
+            position: absolute; 
+            top: 14px; 
+            left: 20px; 
+            color: #4cd964; 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(76, 217, 100, 0.4);
+        }
+        
+        .brand-container { 
+            flex-grow: 1; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin-top: 40px; 
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out;
+        }
+        .brand-text { 
+            font-size: 38px; 
+            font-weight: 900; 
+            color: #fff; 
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.3); 
+            letter-spacing: 2px;
+            animation: pulse 3s infinite alternate;
+        }
+        
+        .footer { 
+            position: absolute; 
+            bottom: 24px; 
+            right: 24px; 
+            color: #555; 
+            font-size: 12px; 
+            text-align: right; 
+            transition: color 0.3s;
+        }
+        .footer:hover { color: #888; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            from { text-shadow: 0 0 15px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.3); }
+            to { text-shadow: 0 0 25px rgba(0, 212, 255, 0.9), 0 0 50px rgba(0, 212, 255, 0.6); }
+        }
+
+        @media (max-width: 380px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .brand-text { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://t.me/paysyvpn" class="tg-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="TG">
+    </a>
+
+    <div class="grid-container">
+        
+        <div class="bar">
+            <span class="bar-text">Ваш текст слева</span>
+        </div>
+
+        <div class="bar">
+            <span class="bar-text">Активна до: 25.04.2026</span>
+        </div>
+
+        <div class="bar">
+            <span class="status-active">Активна</span>
+            <span class="bar-title-text">Подписка</span>
+        </div>
+
+        <div class="bar">
+            <span class="label-corner">Трафик</span>
+            <span class="bar-traffic-text">Бесконечный</span>
+        </div>
+
+    </div>
+
+    <div class="brand-container"><div class="brand-text">PaysyVPN</div></div>
+    <div class="footer">©2026 PaysyVPN, Все права защищены.</div>
+</body>
+</html>
